@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Walentynka</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            padding: 2em;
+        }
+        h1 {
+            font-size: 3rem;
+            color: #ff6f61;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #e6554f;
+        }
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #ff6f61;
+            opacity: 0.8;
+            clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 50% 78%, 18% 100%, 0% 38%);
+            animation: float 5s infinite;
+        }
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) scale(0.5);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1);
+                opacity: 0;
+            }
+        }
+        .choice-container {
+            margin-top: 20px;
+        }
+        .tedy {
+    width: 100%;
+    max-width: 300px; /* Ustalamy maksymalną szerokość obrazka */
+    height: auto; /* Zachowujemy proporcje zdjęcia */
+    object-fit: contain; /* Sprawia, że obrazek nie jest zniekształcony */
+    display: block;
+    margin: 0 auto;
+    max-height: 70vh; /* Ustalamy maksymalną wysokość obrazka na 70% wysokości ekranu */
+    animation: appear 1s ease-in-out;
+}
+
+/* Media query dla urządzeń mobilnych */
+@media (max-width: 600px) {
+    .tedy {
+        width: 90%; /* Dostosowujemy szerokość do 90% ekranu */
+        max-width: 90%; /* Maksymalna szerokość dla małych ekranów */
+        max-height: 50vh; /* Maksymalna wysokość na urządzeniach mobilnych */
+        animation: appear 1s ease-in-out;
+    }
+}
+            
+        
+        .love-message {
+            font-size: 2rem;
+            color: #ff6f61;
+            margin-top: 20px;
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes appear {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Walentynka!</h1>
+        <p>Zostaniesz moją walentynką?</p>
+        <div class="choice-container">
+            <button id="yesButton" onclick="acceptValentine()">Tak</button>
+            <button id="noButton" onclick="declineValentine()">Nie</button>
+        </div>
+    </header>
+    <div id="message" style="display: none; margin-top: 20px; font-size: 1.5rem; color: #ff6f61;"></div>
+
+    <div class="hearts-container" id="hearts"></div>
+    
+
+    <script>
+        function showMessage() {
+            const message = document.getElementById('message');
+            message.style.display = 'block';
+            message.textContent = 'Kocham Cię Martusiu bardzooo mocnooo 💕';
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            document.getElementById('hearts').appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        }
+
+        setInterval(createHeart, 300);
+
+        function acceptValentine() {
+            const teddy = document.createElement('img');
+            teddy.src = 'mis.jpg'; 
+            teddy.alt = 'mis';
+            teddy.className = 'tedy';
+            document.body.appendChild(teddy);
+
+            const loveMessage = document.createElement('div');
+            loveMessage.textContent = 'Kocham Cię Cieciu!! ❤️';
+            loveMessage.className = 'love-message';
+            document.body.appendChild(loveMessage);
+        }
+
+        function declineValentine() {
+            const noButton = document.getElementById('noButton');
+            noButton.remove();
+        }
+    </script>
+</body>
+</html>
